@@ -1,147 +1,56 @@
+# Sassie
 
+## Concept
 
-Sassieは、その間にある余白を扱います。
+Sassie is not a social network for expressing yourself.
 
-## Sassieで起きること
+It is a place where the receiver becomes the main character.
 
-ユーザーは、投稿画面で自由に文章を書きます。
+Instead of showing what someone wanted to say,
+Sassie shows only the traces left while they were trying to say it.
 
-しかし、手放した後に本文は残りません。
+Examples:
 
-タイムラインに表示されるのは、次のような情報です。
+□□□□□□□□
+35 characters
+Message was not sent.
 
-```text
-□□□□□□□□□□□□
+Rewritten 4 times.
 
-48文字
-送信されませんでした
+The screen stayed quiet for 26 seconds before sending.
 
-何度も言葉を選び直しました
-最後の入力から26秒間、画面は静かでした
-```
+The receiver imagines the rest.
 
-本文を読めなくても、受け取る人は入力の痕跡から何かを感じます。
+The application intentionally avoids interpreting emotions.
 
-何があったのかは分かりません。
+There are no correct answers.
 
-どんな感情だったのかも分かりません。
+Silence itself is part of the communication.
 
-それでも、何かを言おうとしていたことは伝わります。
+---
 
-## 主役は受け取る人
+## Goals
 
-一般的なSNSでは、発信者が主役です。
+Create a quiet experience.
 
-- 何を投稿するか
-- どう表現するか
-- どう見られるか
-- どれだけ反応されるか
-- どれだけ拡散されるか
+Reduce information instead of increasing it.
 
-Sassieでは、受け取る側が主役です。
+Encourage imagination rather than explanation.
 
-- すぐに答えを求めない
-- 内容を当てようとしない
-- 相手の気持ちを決めつけない
-- 少し立ち止まる
-- 言葉ではなく余韻を残す
+Leave emotional interpretation to the reader.
 
-投稿者が何を言ったかではなく、受け取った人がどう立ち止まったかを大切にします。
+---
 
-## Sassieにおける「察する」
+## Non-goals
 
-Sassieにおける「察する」は、相手の気持ちを正確に当てることではありません。
+Become another SNS.
 
-察するとは、分からないものを分からないまま受け止めることです。
+Increase engagement.
 
-察するとは、すぐに説明を求めないことです。
+Increase screen time.
 
-察するとは、少し立ち止まることです。
+Maximize user interaction.
 
-## 余韻リアクション
+Gamification.
 
-Sassieにはコメント欄がありません。
-
-コメントがあると、次のような言葉が生まれやすくなります。
-
-- 何があったの？
-- 大丈夫？
-- どうして？
-- 詳しく教えて
-
-これらは優しい言葉かもしれません。
-
-しかし、投稿者にもう一度説明を求める言葉にもなります。
-
-そのためSassieでは、コメントの代わりに「余韻」を置きます。
-
-余韻は、正解を示すものではありません。
-
-- 静かに読んだ
-- 少し立ち止まった
-- ここにいる
-- そっと受け止めた
-
-ということだけを残します。
-
-## 想定する利用場所
-
-Sassieは、1対1のメッセンジャーではありません。
-
-同じ空気を共有する小さな場所での利用を想定します。
-
-例：
-
-- クラス
-- 部活
-- サークル
-- 友人グループ
-- 家族
-- 制作チーム
-
-ただし、学校専用アプリには限定しません。
-
-Sassieは、説明しなくても少し立ち止まってもらえる場所を作るアプリです。
-
-## AIを使わない理由
-
-SassieのMVPでは、AIによる感情分析や文章要約を行いません。
-
-Sassieは、誰かに気持ちを勝手に解釈されたくない人のためのアプリです。
-
-そのため、AIにも感情を決めつけさせません。
-
-Sassieが扱うのは、気持ちの内容ではありません。
-
-扱うのは、次のような観測可能な行動だけです。
-
-- 書いた
-- 消した
-- 書き直した
-- 一度すべて消した
-- 少し止まった
-- 手放すまで時間がかかった
-
-## Sassieが作らないもの
-
-Sassieは、次のものを目的としません。
-
-- 気持ちを正確に伝えること
-- 相手の感情を分析すること
-- 悩みを解決すること
-- 正しい返事を提案すること
-- 投稿を拡散すること
-- 人気を競うこと
-- 反応数を増やすこと
-- バズを作ること
-
-## プロダクト原則
-
-1. 本文を残さない
-2. 感情を決めつけない
-3. 説明を要求しない
-4. コメントを置かない
-5. 余白をなくさない
-6. 数字で競わせない
-7. 受け取る側を主役にする
-8. 分からないものを分からないまま残す
+Virality.
