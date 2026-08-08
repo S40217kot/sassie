@@ -6,9 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db:migrate:turso": "node --env-file=.env.local scripts/migrate-to-turso.mjs"
   },
   "dependencies": {
+    "@libsql/client": "^0.17.4",
     "lucide-react": "latest",
     "next": "latest",
     "react": "latest",

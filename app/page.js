@@ -1,12 +1,14 @@
-import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import { TimelineInteractive } from "@/components/timeline-interactive";
+import { currentUser } from "@/lib/auth";
 import { listPosts } from "@/lib/server-store";
 
 export const dynamic = "force-dynamic";
 
 export default async function TimelinePage() {
-  const cookieStore = await cookies();
-  const clientId = cookieStore.get("sassie_client")?.value ?? "server-render";
-  const posts = await listPosts(clientId);
-  return <TimelineInteractive initialPosts={posts} />;
+  const user = await currentUser();
+  if (!user) redirect("/login");
+
+  const posts = await listPosts(user.id);
+  return <TimelineInteractive initialPosts={posts} userNickname={user.nickname} isAdmin={user.isAdmin} />;
 }

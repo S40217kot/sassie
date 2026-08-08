@@ -1,6 +1,9 @@
 node_modules/
 .next/
 out/
-.env*.local
+.env*
+!.env.example
 npm-debug.log*
-
+data/*.db
+data/*.db-*
+data/app-data.json

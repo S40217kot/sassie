@@ -27,22 +27,6 @@ export function ServerDetailClientV2({ initialPost }) {
     }
   }
 
-  async function choose(feeling) {
-    setError("");
-    try {
-      const response = await fetch(`/api/posts/${post.id}/feeling`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ feeling }),
-      });
-      if (!response.ok) throw new Error("feeling failed");
-      const data = await response.json();
-      setPost((current) => ({ ...current, selectedFeeling: data.selectedFeeling }));
-    } catch {
-      setError("気持ちを保存できませんでした。");
-    }
-  }
-
   return (
     <main className="phone">
       <StatusBar />
@@ -54,25 +38,21 @@ export function ServerDetailClientV2({ initialPost }) {
         <div className="masked" aria-label="伏せられたメッセージ">{post.masked}</div>
         <p className="meta">{post.length}文字</p><p className="meta">送信されませんでした</p>
         <section className="section">
-          <h2 className="section-title"><span>AIが見つけた痕跡</span><Info size={19} strokeWidth={1.5} /></h2>
+          <h2 className="section-title"><span>アプリが見つけた痕跡</span><Info size={19} strokeWidth={1.5} /></h2>
           <ul className="traces detail-traces">{post.detailTraces.map((trace) => <li key={trace}>{trace}</li>)}</ul>
         </section>
         <section className="section">
           <h2 className="section-title">リアクション</h2>
           <div className="reaction-grid">
-            {post.reactions.map(({ emoji, count, selected }) => (
-              <button className={`reaction-box ${selected ? "selected" : ""}`} aria-pressed={selected} aria-label={`${emoji}でリアクション`} onClick={() => react(emoji)} key={emoji}>
-                <span className="emoji">{emoji}</span>{count}
+            {post.reactions.map(({ emoji, count, selected }, index) => (
+              <button className={`reaction-box ${selected ? "selected" : ""}`} disabled={post.isOwn} aria-pressed={selected} aria-label={post.isOwn ? "自分の投稿にはリアクションできません" : `${emoji}でリアクション`} onClick={() => react(emoji)} key={emoji}>
+                <span className="emoji">{emoji}</span>
+                <span className="reaction-label">{feelings[index]}</span>
+                <span className="reaction-count">{count}</span>
               </button>
             ))}
           </div>
           <p className="stopped">{post.stopped}人が立ち止まりました</p>
-        </section>
-        <section className="section">
-          <h2 className="section-title">この投稿に残っていた気持ち</h2>
-          <div className="feelings">
-            {feelings.map((feeling) => <button className={`feeling ${post.selectedFeeling === feeling ? "selected" : ""}`} aria-pressed={post.selectedFeeling === feeling} onClick={() => choose(feeling)} key={feeling}>{feeling}</button>)}
-          </div>
         </section>
         {error && <p role="alert" className="form-error">{error}</p>}
       </article>

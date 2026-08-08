@@ -1,10 +1,12 @@
-import { getClient, jsonForClient } from "@/lib/api-session";
+import { userFromRequest } from "@/lib/auth";
 import { findPost } from "@/lib/server-store";
 
 export async function GET(request, { params }) {
+  const user = await userFromRequest(request);
+  if (!user) return Response.json({ error: "ログインが必要です。" }, { status: 401 });
+
   const { id } = await params;
-  const clientId = getClient(request);
-  const post = await findPost(id, clientId);
+  const post = await findPost(id, user.id);
   if (!post) return Response.json({ error: "投稿が見つかりません。" }, { status: 404 });
-  return jsonForClient({ post }, request, clientId);
+  return Response.json({ post });
 }

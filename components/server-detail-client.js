@@ -6,7 +6,7 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { StatusBar } from "@/components/status-bar";
 
-const feelings = ["静か", "一息つく", "そっと灯す", "大丈夫だよ", "本にする"];
+const feelings = ["静か", "一息つぁE, "そっと灯ぁE, "大丈夫だめE, "本にする"];
 
 export function ServerDetailClient() {
   const { id } = useParams();
@@ -36,20 +36,20 @@ export function ServerDetailClient() {
     if (response.ok) setPost((current) => ({ ...current, selectedFeeling: data.selectedFeeling }));
   }
 
-  if (!post) return <main className="phone"><p style={{padding:24}}>投稿を読み込んでいます。</p></main>;
+  if (!post) return <main className="phone"><p style={{padding:24}}>投稿を読み込んでぁE��す、E/p></main>;
 
   return (
     <main className="phone">
       <StatusBar />
       <header className="detail-header">
-        <Link className="icon-button" href="/" aria-label="戻る"><ChevronLeft size={28} strokeWidth={1.5} /></Link>
-        <button className="icon-button" aria-label="その他"><CircleEllipsis size={23} strokeWidth={1.5} /></button>
+        <Link className="icon-button" href="/" aria-label="戻めE><ChevronLeft size={28} strokeWidth={1.5} /></Link>
+        <button className="icon-button" aria-label="そ�E仁E><CircleEllipsis size={23} strokeWidth={1.5} /></button>
       </header>
       <article className="detail">
-        <div className="masked" aria-label="伏せられたメッセージ">{post.masked}</div>
-        <p className="meta">{post.length}文字</p><p className="meta">送信されませんでした</p>
+        <div className="masked" aria-label="伏せられたメチE��ージ">{post.masked}</div>
+        <p className="meta">{post.length}斁E��E/p><p className="meta">送信されませんでした</p>
         <section className="section">
-          <h2 className="section-title"><span>AIが見つけた痕跡</span><Info size={19} strokeWidth={1.5} /></h2>
+          <h2 className="section-title"><span>アプリが見つけた痕跡</span><Info size={19} strokeWidth={1.5} /></h2>
           <ul className="traces detail-traces">{post.detailTraces.map((trace) => <li key={trace}>{trace}</li>)}</ul>
         </section>
         <section className="section">
@@ -64,7 +64,7 @@ export function ServerDetailClient() {
           <p className="stopped">{post.stopped}人が立ち止まりました</p>
         </section>
         <section className="section">
-          <h2 className="section-title">この投稿に残っていた気持ち</h2>
+          <h2 className="section-title">こ�E投稿に残ってぁE��気持ち</h2>
           <div className="feelings">
             {feelings.map((feeling) => <button className={`feeling ${post.selectedFeeling === feeling ? "selected" : ""}`} aria-pressed={post.selectedFeeling === feeling} onClick={() => choose(feeling)} key={feeling}>{feeling}</button>)}
           </div>
