@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Check, LogOut, Pencil, Repeat2, ShieldCheck, Trash2, UserRound, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 export function ProfileMenu({ nickname, isAdmin = false }) {
   const [open, setOpen] = useState(false);
@@ -182,7 +183,7 @@ export function ProfileMenu({ nickname, isAdmin = false }) {
           </button>
         </div>
       )}
-      {deleteStep > 0 && (
+      {deleteStep > 0 && createPortal(
         <div className="account-delete-overlay">
           {deleteStep === 1 ? (
             <section className="account-delete-dialog" role="dialog" aria-modal="true" aria-labelledby="delete-warning-title">
@@ -220,7 +221,8 @@ export function ProfileMenu({ nickname, isAdmin = false }) {
               </div>
             </form>
           )}
-        </div>
+        </div>,
+        document.body,
       )}
       <button
         type="button"
