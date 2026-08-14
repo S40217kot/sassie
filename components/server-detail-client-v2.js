@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ChevronLeft, CircleEllipsis, Info } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 import { useEffect, useState } from "react";
 import { StatusBar } from "@/components/status-bar";
 
@@ -51,14 +51,13 @@ export function ServerDetailClientV2({ initialPost }) {
       <StatusBar />
       <header className="detail-header">
         <Link className="icon-button" href="/" aria-label="戻る"><ChevronLeft size={28} strokeWidth={1.5} /></Link>
-        <button className="icon-button" aria-label="その他"><CircleEllipsis size={23} strokeWidth={1.5} /></button>
       </header>
       <article className="detail">
         <p className="post-author">{post.ownerNickname}</p>
         <div className="masked" aria-label="伏せられたメッセージ">{post.masked}</div>
         <p className="meta">{post.length}文字</p><p className="meta">送信されませんでした</p>
         <section className="section">
-          <h2 className="section-title"><span>アプリが見つけた痕跡</span><Info size={19} strokeWidth={1.5} /></h2>
+          <h2 className="section-title">アプリが見つけた痕跡</h2>
           <ul className="traces detail-traces">{post.detailTraces.map((trace) => <li key={trace}>{trace}</li>)}</ul>
         </section>
         <section className="section">
