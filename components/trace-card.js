@@ -3,6 +3,7 @@
 export function TraceCard({ post }) {
   return (
     <Link className="trace-card" href={`/posts/${post.id}`} aria-label={`${post.length}文字の投稿の詳細`}>
+      <p className="post-author">{post.ownerNickname}</p>
       <div className="masked" aria-label="伏せられたメッセージ">{post.masked}</div>
       <p className="meta">{post.length}文字</p>
       <p className="meta">送信されませんでした</p>

@@ -63,6 +63,7 @@ a { color: inherit; text-decoration: none; }
   box-shadow: 0 4px 16px rgba(43, 38, 32, .045);
   background: #fff;
 }
+.post-author { margin: 0 0 10px; color: #4f4b46; font-size: 13px; font-weight: 650; line-height: 1.4; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .masked { font-size: 19px; letter-spacing: 2px; line-height: 1.2; margin-bottom: 13px; white-space: nowrap; overflow: hidden; }
 .meta { margin: 0 0 2px; }
 .traces { list-style: none; padding: 7px 0 0; margin: 0; }
@@ -105,7 +106,8 @@ a { color: inherit; text-decoration: none; }
 
 .detail { padding: 22px 24px 48px; }
 .detail-header { height: 54px; padding: 0 13px; display: flex; justify-content: space-between; align-items: center; }
-.detail .masked { margin-top: 20px; font-size: 21px; }
+.detail .post-author { margin-top: 20px; }
+.detail .masked { margin-top: 0; font-size: 21px; }
 .section { border-top: 1px solid var(--line); margin-top: 30px; padding-top: 25px; }
 .section-title { display: flex; justify-content: space-between; align-items: center; font-size: 14px; font-weight: 700; margin: 0 0 11px; }
 .detail-traces { line-height: 2.2; }
@@ -134,7 +136,10 @@ a { color: inherit; text-decoration: none; }
 
 .form-error { color: #8b3a32; font-size: 13px; margin: 12px 0 0; }
 
-.timeline-reaction:disabled, .reaction-box:disabled, .feeling:disabled { opacity: .38; cursor: not-allowed; }
+.timeline-reaction:disabled, .feeling:disabled { opacity: .38; cursor: not-allowed; }
+.reaction-box:disabled { opacity: 1; background: #faf9f7; color: var(--ink); cursor: not-allowed; }
+.reaction-box:disabled .emoji, .reaction-box:disabled .reaction-label { opacity: .58; }
+.reaction-box:disabled .reaction-count { color: #625d57; font-weight: 700; }
 
 .auth-page { display: grid; place-items: center; padding: 44px 28px; }
 .auth-panel { width: 100%; max-width: 330px; }

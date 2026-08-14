@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ChevronLeft, CircleEllipsis, Info } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StatusBar } from "@/components/status-bar";
 
 const feelings = ["静か", "一息つく", "そっと灯す", "大丈夫だよ", "本にする"];
@@ -10,6 +10,25 @@ const feelings = ["静か", "一息つく", "そっと灯す", "大丈夫だよ"
 export function ServerDetailClientV2({ initialPost }) {
   const [post, setPost] = useState(initialPost);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (post.isOwn) return;
+    let cancelled = false;
+
+    async function recordStop() {
+      try {
+        const response = await fetch(`/api/posts/${post.id}/stop`, { method: "POST" });
+        if (!response.ok) return;
+        const data = await response.json();
+        if (!cancelled) setPost((current) => ({ ...current, stopped: data.stopped }));
+      } catch {
+        // 閲覧記録に失敗しても、投稿詳細の表示は継続する。
+      }
+    }
+
+    recordStop();
+    return () => { cancelled = true; };
+  }, [post.id, post.isOwn]);
 
   async function react(emoji) {
     setError("");
@@ -35,6 +54,7 @@ export function ServerDetailClientV2({ initialPost }) {
         <button className="icon-button" aria-label="その他"><CircleEllipsis size={23} strokeWidth={1.5} /></button>
       </header>
       <article className="detail">
+        <p className="post-author">{post.ownerNickname}</p>
         <div className="masked" aria-label="伏せられたメッセージ">{post.masked}</div>
         <p className="meta">{post.length}文字</p><p className="meta">送信されませんでした</p>
         <section className="section">
