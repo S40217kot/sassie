@@ -116,6 +116,12 @@ const schema = [
       INSERT INTO nickname_change_events (id, user_id, changed_at)
       VALUES (lower(hex(randomblob(16))), OLD.id, strftime('%Y-%m-%dT%H:%M:%fZ', 'now'));
     END`,
+  `CREATE TRIGGER IF NOT EXISTS users_nickname_reserve_on_delete
+    AFTER DELETE ON users
+    BEGIN
+      INSERT OR IGNORE INTO reserved_nicknames (nickname, user_id, reserved_at)
+      VALUES (OLD.nickname, OLD.id, strftime('%Y-%m-%dT%H:%M:%fZ', 'now'));
+    END`,
 ];
 
 const tables = [
