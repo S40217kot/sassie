@@ -23,7 +23,7 @@ export function TimelineInteractive({ initialPosts, userNickname, isAdmin, pageT
       <section className="timeline" aria-label="タイムライン">
         {posts.map((post) => (
           <article className="trace-card" key={post.id}>
-            <Link className="trace-card-link" href={`/posts/${post.id}`} aria-label={`${post.length}文字の投稿の詳細`}>
+            <Link className="trace-card-link" href={`/posts/${post.id}`} prefetch={false} aria-label={`${post.length}文字の投稿の詳細`}>
               <p className="post-author">{post.ownerNickname}</p>
               <div className="masked" aria-label="伏せられたメッセージ">{post.masked}</div>
               <p className="meta">{post.length}文字</p>
