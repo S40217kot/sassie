@@ -15,7 +15,7 @@ export function TimelineInteractive({ initialPosts, userNickname, isAdmin, pageT
       <header className={`topbar ${pageTitle ? "has-page-title" : ""}`}>
         <Link className="brand left" href="/">Sassie</Link>
         <span className="center">{pageTitle}</span>
-        <div className="right" style={{ display: "flex", alignItems: "center", gap: 12 }}>
+        <div className="right" style={{ display: "flex", alignItems: "center", gap: pageTitle ? 6 : 12 }}>
           <Link className="post-button" href="/create">＋ 投稿する</Link>
           <HeaderMenu />
         </div>
