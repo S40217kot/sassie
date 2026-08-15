@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ChevronLeft, ShieldCheck, Trash2 } from "lucide-react";
+import { ChevronLeft, ShieldCheck, ShieldMinus, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -68,6 +68,11 @@ export function AdminClient({ initialData }) {
               && !user.isSystem
               && !user.isAdmin
               && !user.isSuperAdmin;
+            const canDemote = initialData.permissions.isSuperAdmin
+              && !user.isSelf
+              && !user.isSystem
+              && user.isAdmin
+              && !user.isSuperAdmin;
 
             return (
               <article className="admin-row" key={user.id}>
@@ -78,7 +83,7 @@ export function AdminClient({ initialData }) {
                   </div>
                   <p>投稿 {user.postCount}件・リアクション {user.reactionCount}件</p>
                 </div>
-                {(canDelete || canPromote) ? (
+                {(canDelete || canPromote || canDemote) ? (
                   <div className="admin-actions">
                     {canPromote && (
                       <button
@@ -92,6 +97,19 @@ export function AdminClient({ initialData }) {
                           message: `${user.nickname}を管理者にしますか？`,
                         })}
                       ><ShieldCheck size={17} /></button>
+                    )}
+                    {canDemote && (
+                      <button
+                        className="admin-demote"
+                        aria-label={`${user.nickname}の管理者権限を剥奪`}
+                        disabled={Boolean(busyKey)}
+                        onClick={() => runAction({
+                          key: `demote-${user.id}`,
+                          url: `/api/admin/users/${user.id}/demote`,
+                          method: "POST",
+                          message: `${user.nickname}の管理者権限を剥奪し、通常ユーザーに戻しますか？`,
+                        })}
+                      ><ShieldMinus size={17} /></button>
                     )}
                     {canDelete && (
                       <button
