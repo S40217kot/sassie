@@ -50,8 +50,13 @@ export function ServerCreateClientV2() {
         <button onClick={send} disabled={!text.trim() || isSending} className={`send-button right ${text.trim() && !isSending ? "ready" : ""}`}>{isSending ? "送信中" : "送信する"}</button>
       </header>
       <section className="composer">
-        <div className="prompts">ここに自由に書いてみてください。<br />誰にも見られません。<br />うまく言葉にできなくても、<br />そのままで大丈夫です。</div>
-        <textarea aria-label="投稿内容" autoFocus value={text} onInput={changeText} onKeyUp={changeText} />
+        <textarea
+          aria-label="投稿内容"
+          autoFocus
+          value={text}
+          onChange={changeText}
+          placeholder={"ここに自由に書いてみてください。\n誰にも見られません。\nうまく言葉にできなくても、\nそのままで大丈夫です。"}
+        />
         {error && <p role="alert" className="form-error">{error}</p>}
       </section>
       <footer className="composer-footer">
