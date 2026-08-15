@@ -12,7 +12,7 @@ export function TimelineInteractive({ initialPosts, userNickname, isAdmin, pageT
   return (
     <main className="phone">
       <StatusBar />
-      <header className="topbar">
+      <header className={`topbar ${pageTitle ? "has-page-title" : ""}`}>
         <Link className="brand left" href="/">Sassie</Link>
         <span className="center">{pageTitle}</span>
         <div className="right" style={{ display: "flex", alignItems: "center", gap: 12 }}>
