@@ -73,7 +73,7 @@ export function AuthClient({ initialAccounts = [] }) {
   }
 
   return (
-    <main className="phone auth-page">
+    <main className={`phone auth-page ${!showForm ? "account-switch-page" : ""}`}>
       <section className="auth-panel">
         <h1 className="auth-brand">Sassie</h1>
         <p className="auth-copy">{showForm ? "言葉になる前の、静かな痕跡。" : "アカウントを切り替える"}</p>
