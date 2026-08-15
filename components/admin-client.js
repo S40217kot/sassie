@@ -163,21 +163,19 @@ export function AdminClient({ initialData }) {
         <div className="admin-section-heading">
           <h2>リアクション</h2><span>{initialData.reactions.length}件</span>
         </div>
-        <div className="admin-list">
+        <div className="admin-list admin-reaction-list">
           {initialData.reactions.length === 0 && <p className="admin-empty">リアクションはありません。</p>}
           {initialData.reactions.map((reaction) => {
             const key = `${reaction.kind}-${reaction.postId}-${reaction.userId}-${reaction.value}`;
             return (
-              <article className="admin-row" key={key}>
-                <div className="admin-row-main">
-                  <div className="admin-row-title">
-                    <strong>{reaction.value}</strong>
-                    <span>{reaction.kind === "emoji" ? "絵文字" : "気持ち"}</span>
-                  </div>
-                  <p>{reaction.userNickname} → {reaction.postLength}文字の投稿</p>
+              <article className="admin-row admin-reaction-row" key={key}>
+                <div className="admin-row-main admin-reaction-main">
+                  <strong className="admin-reaction-value">{reaction.value}</strong>
+                  <span className="admin-reaction-kind">{reaction.kind === "emoji" ? "絵文字" : "気持ち"}</span>
+                  <span className="admin-reaction-target">{reaction.userNickname} → {reaction.postLength}文字</span>
                 </div>
                 <button
-                  className="admin-delete"
+                  className="admin-delete admin-reaction-delete"
                   aria-label={`${reaction.value}のリアクションを削除`}
                   disabled={Boolean(busyKey)}
                   onClick={() => runAction({

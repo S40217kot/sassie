@@ -221,6 +221,13 @@ a { color: inherit; text-decoration: none; }
 .admin-delete:hover { background: #f7eeee; }
 .admin-delete:disabled { opacity: .4; cursor: wait; }
 .admin-empty { padding: 20px; text-align: center; }
+.admin-reaction-list { max-height: 330px; overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain; scrollbar-gutter: stable; }
+.admin-reaction-row { min-height: 44px; padding: 6px 9px 6px 12px; gap: 7px; }
+.admin-reaction-main { display: flex; align-items: center; gap: 7px; overflow: hidden; }
+.admin-reaction-value { flex: 0 0 auto; font-size: 14px; line-height: 1.3; }
+.admin-reaction-kind { flex: 0 0 auto; border-radius: 999px; padding: 1px 6px; background: var(--soft); color: var(--muted); font-size: 10px; }
+.admin-reaction-target { min-width: 0; overflow: hidden; color: var(--muted); font-size: 11px; text-overflow: ellipsis; white-space: nowrap; }
+.admin-reaction-delete { padding: 7px; }
 @media (min-width: 921px) { .admin-page { margin-top: 28px; margin-bottom: 28px; border: 1px solid var(--line); border-radius: 22px; } }
 
 .account-switcher { display: grid; gap: 16px; }
