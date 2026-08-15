@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ChevronLeft, ShieldCheck, ShieldMinus, Trash2 } from "lucide-react";
+import { ChevronLeft, Pencil, ShieldCheck, ShieldMinus, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -42,6 +42,25 @@ export function AdminClient({ initialData }) {
     }
   }
 
+  function changeNickname(user) {
+    const entered = window.prompt(`${user.nickname}の新しいニックネームを入力してください。`, user.nickname);
+    if (entered === null) return;
+    const nickname = entered.trim();
+    if (nickname.length < 2 || nickname.length > 20) {
+      setError("ニックネームは2〜20文字で入力してください。");
+      return;
+    }
+    if (nickname === user.nickname) return;
+
+    runAction({
+      key: `nickname-${user.id}`,
+      url: `/api/admin/users/${user.id}/nickname`,
+      method: "PATCH",
+      body: { nickname },
+      message: `${user.nickname}のニックネームを「${nickname}」へ変更しますか？`,
+    });
+  }
+
   return (
     <main className="admin-page">
       <header className="admin-header">
@@ -73,6 +92,10 @@ export function AdminClient({ initialData }) {
               && !user.isSystem
               && user.isAdmin
               && !user.isSuperAdmin;
+            const canRename = !user.isSelf
+              && !user.isSystem
+              && !user.isSuperAdmin
+              && (initialData.permissions.isSuperAdmin || !user.isAdmin);
 
             return (
               <article className="admin-row" key={user.id}>
@@ -83,8 +106,16 @@ export function AdminClient({ initialData }) {
                   </div>
                   <p>投稿 {user.postCount}件・リアクション {user.reactionCount}件</p>
                 </div>
-                {(canDelete || canPromote || canDemote) ? (
+                {(canDelete || canPromote || canDemote || canRename) ? (
                   <div className="admin-actions">
+                    {canRename && (
+                      <button
+                        className="admin-rename"
+                        aria-label={`${user.nickname}のニックネームを変更`}
+                        disabled={Boolean(busyKey)}
+                        onClick={() => changeNickname(user)}
+                      ><Pencil size={16} /></button>
+                    )}
                     {canPromote && (
                       <button
                         className="admin-promote"
