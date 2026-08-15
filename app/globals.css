@@ -45,6 +45,8 @@ a { color: inherit; text-decoration: none; }
 .topbar.has-page-title .left { grid-column: 1; }
 .topbar.has-page-title .right { grid-column: 3; position: relative; z-index: 1; }
 .topbar.has-page-title .post-button { padding: 8px 10px; font-size: 12px; }
+.topbar.timeline-topbar { position: fixed; z-index: 30; top: 0; left: 50%; transform: translateX(-50%); width: min(100%, 430px); background: #fff; }
+.timeline-topbar + .timeline { padding-top: 82px; }
 
 .brand { font-family: Georgia, serif; font-size: 22px; letter-spacing: -.3px; }
 .topbar .left { justify-self: start; }
