@@ -11,11 +11,18 @@ export function ServerCreateClientV2() {
   const [isSending, setIsSending] = useState(false);
   const [error, setError] = useState("");
   const startedAt = useRef(null);
+  const previousText = useRef("");
+  const clearedCount = useRef(0);
   const router = useRouter();
 
   function changeText(event) {
-    if (!startedAt.current && event.target.value) startedAt.current = Date.now();
-    setText(event.target.value);
+    const nextText = event.target.value;
+    if (!startedAt.current && nextText) startedAt.current = Date.now();
+    if (previousText.current.length > 0 && nextText.length === 0) {
+      clearedCount.current += 1;
+    }
+    previousText.current = nextText;
+    setText(nextText);
     setError("");
   }
 
@@ -30,6 +37,7 @@ export function ServerCreateClientV2() {
         body: JSON.stringify({
           length: [...text.trim()].length,
           duration: Math.max(1, Math.round((Date.now() - startedAt.current) / 1000)),
+          clearedCount: clearedCount.current,
         }),
       });
       if (!response.ok) throw new Error("send failed");
