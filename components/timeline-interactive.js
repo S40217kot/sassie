@@ -5,6 +5,7 @@ import { Home, Plus } from "lucide-react";
 import { ProfileMenu } from "@/components/profile-menu";
 import { StatusBar } from "@/components/status-bar";
 import { HeaderMenu } from "@/components/header-menu";
+import { TraceAfterimage } from "@/components/trace-afterimage";
 
 export function TimelineInteractive({ initialPosts, userNickname, isAdmin, pageTitle = "" }) {
   const posts = initialPosts;
@@ -30,7 +31,12 @@ export function TimelineInteractive({ initialPosts, userNickname, isAdmin, pageT
           >
             <Link className="trace-card-link" href={`/posts/${post.id}`} prefetch={false} aria-label={`${post.length}文字の投稿の詳細`}>
               <p className="post-author">{post.ownerNickname}</p>
-              <div className="masked" aria-label="伏せられたメッセージ">{post.masked}</div>
+              <TraceAfterimage
+                postId={post.id}
+                finalLength={post.length}
+                writingDuration={post.writingDuration}
+                rewriteCount={post.rewriteCount}
+              />
               <p className="meta">{post.length}文字</p>
               <p className="meta">送信されませんでした</p>
               <ul className="traces">{post.traces.map((trace) => <li key={trace}>{trace}</li>)}</ul>

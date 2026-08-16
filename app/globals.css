@@ -82,6 +82,12 @@ a { color: inherit; text-decoration: none; }
 }
 .post-author { margin: 0 0 10px; color: #4f4b46; font-size: 13px; font-weight: 650; line-height: 1.4; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .masked { font-size: 19px; letter-spacing: 2px; line-height: 1.2; margin-bottom: 13px; white-space: nowrap; overflow: hidden; }
+.trace-afterimage { min-height: 23px; }
+.trace-afterimage-shape { display: block; transform-origin: left center; animation: trace-afterimage-shift 460ms cubic-bezier(.22, .68, .3, 1) both; }
+@keyframes trace-afterimage-shift {
+  from { opacity: .28; transform: translateY(1px); filter: blur(.35px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
 .meta { margin: 0 0 2px; }
 .traces { list-style: none; padding: 7px 0 0; margin: 0; }
 .traces li { position: relative; padding-left: 15px; margin: 4px 0; }
@@ -153,6 +159,7 @@ a { color: inherit; text-decoration: none; }
 
 @media (prefers-reduced-motion: reduce) {
   .timeline-voice, .timeline-entry { opacity: 1; transform: none; animation: none; }
+  .trace-afterimage-shape { animation: none; }
   .composer, .composer-footer { transition: none; }
   .create-page.is-releasing .composer { transform: none; }
 }
