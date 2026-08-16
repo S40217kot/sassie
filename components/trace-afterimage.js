@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
 let nextTraceStartAt = 0;
+const animatedPostIds = new Set();
 
 function numberBetween(value, minimum, maximum) {
   return Math.min(maximum, Math.max(minimum, value));
@@ -57,22 +58,6 @@ function buildStages(postId, finalLength, writingDuration, rewriteCount) {
   });
 }
 
-function hasSeen(postId) {
-  try {
-    return sessionStorage.getItem(`sassie:trace-seen:${postId}`) === "1";
-  } catch {
-    return false;
-  }
-}
-
-function rememberSeen(postId) {
-  try {
-    sessionStorage.setItem(`sassie:trace-seen:${postId}`, "1");
-  } catch {
-    // The animation still works when session storage is unavailable.
-  }
-}
-
 export function TraceAfterimage({ postId, finalLength, writingDuration, rewriteCount }) {
   const finalCount = numberBetween(Number(finalLength) || 1, 1, 10000);
   const stages = useMemo(
@@ -87,7 +72,7 @@ export function TraceAfterimage({ postId, finalLength, writingDuration, rewriteC
     if (!element) return undefined;
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reducedMotion || hasSeen(postId)) {
+    if (reducedMotion || animatedPostIds.has(postId)) {
       setStageIndex(stages.length - 1);
       return undefined;
     }
@@ -97,7 +82,7 @@ export function TraceAfterimage({ postId, finalLength, writingDuration, rewriteC
     let observer;
 
     const begin = () => {
-      rememberSeen(postId);
+      animatedPostIds.add(postId);
       setStageIndex(0);
       for (let index = 1; index < stages.length; index += 1) {
         stageTimers.push(setTimeout(() => setStageIndex(index), stages[index].at));
