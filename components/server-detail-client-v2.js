@@ -5,7 +5,7 @@ import { ChevronLeft } from "lucide-react";
 import { useState } from "react";
 import { StatusBar } from "@/components/status-bar";
 
-const feelings = ["静か", "一息つく", "そっと灯す", "大丈夫だよ", "本にする"];
+const feelings = ["静か", "一息つく", "そっと灯す", "大丈夫だよ", "心に留める"];
 
 export function ServerDetailClientV2({ initialPost }) {
   const [post, setPost] = useState(initialPost);
